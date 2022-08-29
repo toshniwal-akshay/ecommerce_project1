@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     'django.contrib.sites',
 
     'allauth',
@@ -82,9 +82,7 @@ AUTHENTICATION_BACKENDS = [
 
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
- ]
-
-
+]
 
 
 WSGI_APPLICATION = 'ecommerce_project.wsgi.application'
@@ -135,7 +133,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-SITE_ID =  1
+SITE_ID = 1
 
 
 # Static files (CSS, JavaScript, Images)
@@ -151,10 +149,10 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
-ACCOUNT_LOGOUT_REDIRECT_URL ='/accounts/login/' 
+ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 LOGIN_REDIRECT_URL = '/'
 
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
