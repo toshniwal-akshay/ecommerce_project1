@@ -41,7 +41,9 @@
         <a class="btn btn-primary mx-1" href="{% url 'account_logout' %}">Sign Out</a>
         {% else %}
         <a class="btn btn-primary mx-1" href="{% url 'account_login' %}">Sign In</a>
-        <a class="btn btn-primary mx-1" href="{% url 'user_account_signup' %}">Sign Up</a>        
+        <a class="btn btn-primary mx-1" href="{% url 'user_account_signup' %}">Sign Up</a>  
+        <a class="btn btn-primary mx-1" href="{% url 'shop_account_signup' %}">Shop Sign Up</a>        
+              
         {% endif %}
       </form>
     </div>

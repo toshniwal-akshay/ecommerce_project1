@@ -11,24 +11,41 @@
 
 {% if confirmation %}
 
-	{% user_display confirmation.email_address.user as user_display %}
+{% user_display confirmation.email_address.user.name as user_display %}
 
-	<p class="verification_sent_info" >{% blocktrans with confirmation.email_address.email as email %} Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
+{% if confirmation.email_address.user.shop %}
 
-	<form method="post" class="container-fluid text-center" action="{% url 'account_confirm_email' confirmation.key %}">
+<p class="verification_sent_info">{% blocktrans with confirmation.email_address.email as email %} Hello <b>{{ user_display }}</b> your Verification and Approval request  is sent to Admin. Please wait till Verification.  {% endblocktrans %}
+</p>
+
+<!-- <form method="post" class="container-fluid text-center" action="{% url 'account_confirm_email' confirmation.key %}">
 	{% csrf_token %}
-    	<button class="btn btn-outline-primary btn-lg" type="submit">{% trans 'Confirm' %}</button>
-	</form>
+ 
+	<button class="btn btn-outline-primary btn-lg" type="submit">{% trans 'Confirm' %}</button>
+</form> -->
+{% else %}
+<p class="verification_sent_info">{% blocktrans with confirmation.email_address.email as email %} Please confirm that 
+	<a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user <b>{{ user_display }}</b>.{% endblocktrans %}
+</p>
 
+<form method="post" class="container-fluid text-center" action="{% url 'account_confirm_email' confirmation.key %}">
+	{% csrf_token %}
+
+	<button class="btn btn-outline-primary btn-lg" type="submit">{% trans 'Confirm' %}</button>
+</form>
+
+{% endif %}
 {% else %}
 
-	{% url 'account_email' as email_url %}
+{% url 'account_email' as email_url %}
 
-	<p class="verification_sent_info" >{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>. You will be redirected to login page in 5 seconds.{% endblocktrans %}</p>
-	<script>
-	setTimeout("location.href = '{% url 'account_login' %}';",5000);
-	</script>
-	
+<p class="verification_sent_info">{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a
+		href="{{ email_url }}">issue a new e-mail confirmation request</a>. You will be redirected to login page in 5
+	seconds.{% endblocktrans %}</p>
+<script>
+	setTimeout("location.href = '{% url 'account_login' %}';", 5000);
+</script>
+
 {% endif %}
 
 {% endblock %}
